@@ -35,6 +35,17 @@ public class SecurityConfig {
         http
                 .csrf((auth)->auth.disable()); // 위변조 csrf 기술 적용 X
         // 기술을 적용하지 않는 이유는 csrf 설정을 하게되면 post 요청을 보낼때 csrf 토큰도 같이 보내주어야 로그인이 진행되기 때문에
+
+        http
+                .sessionManagement((auth) -> auth
+                        .maximumSessions(1)  // 하나의 아이디에 대한 다중 로그인 허용 개수
+                        .maxSessionsPreventsLogin(true)); // 다중 로그인 개수 초과시 방법 true : 새로운 로그인 차단 false : 기존 세션 하나 삭제
+
+        http
+                .sessionManagement((auth) -> auth
+                        .sessionFixation().changeSessionId()); // 세선 고정 보호 : 로그인 시 동일한 세션에 대한 id 변경
+
+
         return http.build();
     }
 }

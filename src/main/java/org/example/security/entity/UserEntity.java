@@ -6,10 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class UserEntity {
 
     @Id // @Id 애노테이션은 JPA 엔티티 객체의 식별자로 사용할 필드에 적용하며, 유니크한 DB의 컬럼과 맵핑
